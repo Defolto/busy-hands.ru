@@ -1,0 +1,26 @@
+{
+  "name": "busy-hands.ru",
+  "version": "0.0.1",
+  "description": "application for business",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Defolto/busy-hands.ru.git"
+  },
+  "keywords": [
+    "business"
+  ],
+  "author": "Maxim Egorov <defoltmaks@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Defolto/busy-hands.ru/issues"
+  },
+  "homepage": "https://github.com/Defolto/busy-hands.ru#readme",
+  "devDependencies": {
+    "webpack": "^5.11.0",
+    "webpack-cli": "^4.2.0"
+  }
+}
