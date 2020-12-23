@@ -3,16 +3,54 @@ main{
     flex-direction: row;
 
     .col-left{
+        display: flex;
+        flex-direction: column;
         width: 40%;
         border-top: 1px solid #000;
         border-right: 1px solid black;
         border-bottom: 1px solid #000;
 
         .news{
+            display: flex;
+            margin-top: auto;
             border-bottom: 1px solid #000;
+
+            p{
+                margin: auto;
+                margin-bottom: 50%;
+            }
         }
         .calendar{
-            
+            &-wrapper{
+                &__month{
+                    display: flex;
+                    flex-direction: row;
+
+                    div{
+                        margin-left: auto;
+                        display: flex;
+                        flex-direction: row;
+                    }
+                }
+
+                &__dates{
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0 20%;
+
+                    &-row{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-around;
+                        margin: 5px 0;
+                        
+                        p{
+                            width: 5%;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -31,6 +69,10 @@ main{
             nav{
                 display: flex;
                 flex-direction: row;
+
+                .active{
+                    color: red;
+                }
     
                 p{
                     margin: 10px 20px;
@@ -45,8 +87,76 @@ main{
             }
         }
 
-        .display{
-            height: 500px;
+        .chat{
+            display: flex;
+            flex-direction: row;
+
+            &-choose{
+                display: flex;
+                flex-direction: column;
+                border-right: 1px solid black;
+                overflow-y: scroll;
+                width: 35%;
+
+                &::-webkit-scrollbar { width: 0; }
+                &{ -ms-overflow-style: none; }
+                &{ overflow: -moz-scrollbars-none; }
+
+                &__people{
+                    display: flex;
+                    flex-direction: row;
+                    padding: 10px;
+                    border-bottom: 1px solid #000;
+
+                    img{
+                        width: 40px;
+                        height: 40px;
+                        margin-right: 15px;
+                    }
+                }
+            }
+
+            &-messages{
+                padding: 10px;
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+
+                .message{
+                    padding: 10px 15px;
+                    border-radius: 10px;
+                    margin: 8px 0;
+                    background-color: white;
+                    max-width: 45%;
+                }
+
+                .in{
+                    margin-right: auto;
+                }
+
+                .out{
+                    margin-left: auto;
+                }
+
+                form{
+                    display: block;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: auto;
+                    width: 100%;
+
+                    .text{
+                        width: 80%;
+                        padding: 8px;
+                    }
+
+                    .submit{
+                        width: 15%;
+                        padding: 8px 0;
+                        text-align: center;
+                    }
+                }
+            }
         }
     }
 }
