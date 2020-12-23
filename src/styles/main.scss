@@ -1,0 +1,52 @@
+main{
+    display: flex;
+    flex-direction: row;
+
+    .col-left{
+        width: 40%;
+        border-top: 1px solid #000;
+        border-right: 1px solid black;
+        border-bottom: 1px solid #000;
+
+        .news{
+            border-bottom: 1px solid #000;
+        }
+        .calendar{
+            
+        }
+    }
+
+    .col-right{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+
+        .menu{
+            display: flex;
+            flex-direction: row;
+            border-bottom: 1px solid #000;
+
+            nav{
+                display: flex;
+                flex-direction: row;
+    
+                p{
+                    margin: 10px 20px;
+                    cursor: pointer;
+                }
+            }
+    
+            div{
+                margin: 10px 0;
+                margin-left: auto;
+                margin-right: 20px;
+            }
+        }
+
+        .display{
+            height: 500px;
+        }
+    }
+}

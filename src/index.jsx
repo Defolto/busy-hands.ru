@@ -1,9 +1,28 @@
-import './styles/style.scss'
-import React from 'react'
+import React, { Fragment } from 'react'
 import {render} from 'react-dom'
+import {Header} from './Components/Header.jsx'
+import {Main} from './Components/Main.jsx'
+import './styles/general.scss'
 
-const App = () =>(
-    <p>Да прибудет с нами сила:)</p>
-)
+class BusyHands extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            test: "шапка"
+        }
+    }
 
-render(<App />, document.querySelector('#app'))
+    render() {
+      return (
+        <Fragment>
+            <Header />
+            <Main />
+            <footer>
+                <p>Created by Maxim Egorov</p>
+            </footer>
+        </Fragment>
+      );
+    }
+}
+
+render(<BusyHands />, document.querySelector('#Busy-hands'))

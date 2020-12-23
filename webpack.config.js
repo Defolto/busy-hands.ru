@@ -21,6 +21,11 @@ module.exports = {
             '@models': path.resolve(__dirname, 'src/models')
         }
     },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 9000
+    },
     optimization: {
         splitChunks: {
             chunks: "all"
@@ -61,7 +66,18 @@ module.exports = {
                     plugins: ['@babel/plugin-proposal-class-properties']
                 }
                 }
-            }
+            },
+            {
+                test: /\.svg$/,
+                use: [
+                  {
+                    loader: 'svg-url-loader',
+                    options: {
+                      limit: 10000,
+                    },
+                  },
+                ],
+              },
         ]
     }
 }
