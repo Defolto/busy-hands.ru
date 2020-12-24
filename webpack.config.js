@@ -4,6 +4,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
@@ -44,6 +45,12 @@ module.exports = {
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: "[name].[contenthash].css"
+        }),
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: path.resolve(__dirname, 'src/server'),
+                to: path.resolve(__dirname, 'dist/server')
+            }]
         })
     ],
     module:{

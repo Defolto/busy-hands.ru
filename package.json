@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "serve": "webpack serve"
+    "serve": "webpack serve",
+    "node": "node ./dist/server/server.js"
   },
   "repository": {
     "type": "git",
@@ -22,13 +23,17 @@
   },
   "homepage": "https://github.com/Defolto/busy-hands.ru#readme",
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.0.1",
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^1.3.3",
+    "mongoose": "^5.11.8",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
@@ -40,9 +45,14 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "body-parser": "^1.19.0",
     "clean-webpack-plugin": "^3.0.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
+    "multer": "^1.4.2",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "socket.io": "^3.0.4"
   }
 }

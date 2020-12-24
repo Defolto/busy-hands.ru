@@ -8,7 +8,11 @@ class BusyHands extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            test: "шапка"
+            user: {
+                name: "",
+                img: "",
+                company: ""
+            }
         }
     }
 

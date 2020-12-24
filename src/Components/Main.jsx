@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/main.scss'
+import {sendMessage, cleareInput} from '../js/functions'
 
 export class Main extends React.Component {
     constructor(props){
@@ -110,11 +111,13 @@ function Display(props) {
                         Привет:)
                     </div>
                     <div className="message out">
-                        Хех, салам)
+                        Хех, салам
                     </div>
 
-                    <form action="" method="post">
-                        <input className="text" type="text"/>
+                    <form onSubmit={(event)=>{event.preventDefault();
+                                            sendMessage(document.querySelector("#sendMessage__text").value);
+                                            cleareInput("sendMessage__text")}} method="post" id="sendMessage">
+                        <input className="text" type="text" id="sendMessage__text"/>
                         <input className="submit" type="submit" value="Отправить"/>
                     </form>
                 </div>
@@ -125,5 +128,4 @@ function Display(props) {
             <div>у</div>
         )
     }
-
 }
