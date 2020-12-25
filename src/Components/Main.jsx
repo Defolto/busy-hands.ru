@@ -6,11 +6,12 @@ export class Main extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            test: "шапка"
+            pointMenu: "chat"
         }
     }
 
     render() {
+    console.log(this.props.infoUser);
       return (
         <main>
             <div className="col-left">
@@ -31,7 +32,8 @@ export class Main extends React.Component {
                         Сотрудники: 5 онлайн, 4 оффлайн
                     </div>
                 </div>
-                <Display state="chat" />
+                <Display state={this.state.pointMenu} 
+                        userChats={this.props.infoUser.chats} />
             </div>
         </main>
       );
@@ -94,6 +96,21 @@ function Calendar(props) {
 }
 
 function Display(props) {
+    fetch('/getUsersChat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            date:{
+                chats: props.userChats
+            }
+        })
+    })
+    .then(res => res.json())
+    .then(res => {
+        console.log(res);
+    });
     if (props.state == "chat") {
         return(
             <div className="display chat">

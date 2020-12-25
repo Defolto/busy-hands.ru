@@ -1,15 +1,9 @@
 class User{
-    constructor(name, img, company){
-        this.name = name;
-        this.img = img;
-        this.company = company;
-    }
-
-    name = '';
-    img = '';
-    company = '';
-    chats = {
-        
+    constructor(user){
+        this.name = user.name;
+        this.img = user.img;
+        this.company = user.company;
+        this.chats = user.chats;
     }
 }
 

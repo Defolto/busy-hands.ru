@@ -1,5 +1,5 @@
 // функция контроля высоты блока main ---------------------------------------------------
-function setHeightMain() {
+export function setHeightMain() {
     const windowHeight = document.documentElement.clientHeight;
     const headerFooterHeight = document.querySelector('header').clientHeight + document.querySelector('footer').clientHeight;
     document.querySelector('main').style.height = windowHeight - headerFooterHeight + 'px';
@@ -8,21 +8,16 @@ function setHeightMain() {
 
 
 // функция контроля высоты блока chat-choose ---------------------------------------------------
-function setHeightChatChoose() {
+export function setHeightChatChoose() {
     const colRightHeight = document.querySelector('.col-right').clientHeight;
     const menuHeight = document.querySelector('.menu').clientHeight;
     document.querySelector('.chat-choose').style.height = colRightHeight - menuHeight + 'px';
 }
 // функция контроля высоты блока chat-choose ---------------------------------------------------
 
-
-window.onload = function() {
-    setHeightMain();
-    setHeightChatChoose();
-}
-
 window.addEventListener(`resize`, ()=>{
     setHeightMain();
     setHeightChatChoose();
 });
+
 

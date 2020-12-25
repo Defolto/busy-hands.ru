@@ -13,11 +13,12 @@ export class Header extends React.Component {
     render() {
       return (
         <header>
-            <h2>Название компании</h2>
+            <h2>{this.props.infoUser.company}</h2>
             <h1>Busy-hands.ru</h1>
             <div className='name-settings'>
-                <p>Имя сотрудника</p>
-                <img src={setting} alt=""/>
+                <p>{this.props.infoUser.name}</p>
+                <img className="ava" src={"server/img/" + this.props.infoUser.img} alt=""/>
+                <img className="setting" src={setting} alt=""/>
             </div>
         </header>
       );

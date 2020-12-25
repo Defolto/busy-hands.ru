@@ -10,19 +10,6 @@ const User = require('./models/User')
 const MongoClient = require("mongodb").MongoClient;
 const url = "mongodb+srv://test:952863mak@cluster0.ainc3.mongodb.net/test?retryWrites=true&w=majority";
 const mongoClient = new MongoClient(url, {useUnifiedTopology: true});
- 
-mongoClient.connect(function(err, client){
-      
-    const db = client.db("busy-hand");
-    const collection = db.collection("users");
-     
-    collection.find({email: "defoltspam@gmail.com", password: "952863mak"}).toArray(function(err, results){
-        // console.log(results[0].company);
-        let user = new User(results[0].name, results[0].img, results[0].company)
-        console.log(user);
-        client.close();
-    });
-});
 
 app.use(express.static(path.resolve(__dirname, '../')));
 
@@ -30,6 +17,49 @@ app.use(express.json());
 
 app.post('/test', function(request, response){
     console.log(request.body.text);
+    response.json({answer: request.body.text + "12"});
+});
+
+app.post('/login', function(request, response){
+    mongoClient.connect(function(err, client){
+
+        const db = client.db("busy-hand");
+        const collection = db.collection("users");
+        console.log(request.body.date.email);
+         
+        collection.find({"email": request.body.date.email, "password": request.body.date.password}).toArray(function(err, results){
+            if (results.length) {
+                let user = new User(results[0])
+                client.close();
+                response.json(user);
+            } else {
+                response.json(false);
+            }
+        });
+    });
+});
+
+app.post('/getUsersChat', function(request, response){
+    mongoClient.connect(function(err, client){
+
+        const db = client.db("busy-hand");
+        const collection = db.collection("users");
+        let users = [];
+
+        request.body.date.chats.forEach(element => {
+            users.push(element.id)
+        });
+
+        console.log(users);
+
+        // FIXME: разобраться почему возвращается undefind
+        collection.find({"email": 'defoltspam@gmail.com'}).toArray(function(err, results){
+            console.log(results);
+            client.close();
+        });
+
+        response.json(users);
+    });
 });
 
 app.get('/', function(req, res) {

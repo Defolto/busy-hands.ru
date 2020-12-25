@@ -1,3 +1,7 @@
+export function cleareInput(id){
+    document.querySelector(`#${id}`).value = '';
+}
+
 export function sendMessage(text) {
     fetch('/test', {
         method: 'POST',
@@ -7,9 +11,7 @@ export function sendMessage(text) {
         body: JSON.stringify({
             text: text
         })
-    });
-}
-
-export function cleareInput(id){
-    document.querySelector(`#${id}`).value = '';
+    })
+    .then(res => res.json())
+    .then(res => { console.log(res);});
 }
