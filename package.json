@@ -53,6 +53,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "socket.io": "^3.0.4"
+    "socket.io": "^3.0.4",
+    "underscore": "^1.12.0"
   }
 }

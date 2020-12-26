@@ -1,17 +1,24 @@
 import React from 'react'
 import '../styles/main.scss'
 import {sendMessage, cleareInput} from '../js/functions'
+import _ from 'underscore'
 
 export class Main extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            pointMenu: "chat"
+            pointMenu: "chat",
+            story: "Здесь пока пусто"
         }
     }
 
+    updateStory = (story) =>{
+        this.setState({
+            story: story
+        })
+    }
+
     render() {
-    console.log(this.props.infoUser);
       return (
         <main>
             <div className="col-left">
@@ -33,7 +40,9 @@ export class Main extends React.Component {
                     </div>
                 </div>
                 <Display state={this.state.pointMenu} 
-                        userChats={this.props.infoUser.chats} />
+                        userChats={this.props.infoUser.chats}
+                        updateStory={this.updateStory}
+                        story={this.state.story} />
             </div>
         </main>
       );
@@ -109,19 +118,24 @@ function Display(props) {
     })
     .then(res => res.json())
     .then(res => {
-        console.log(res);
+        const todoItems = res.map((todo, index) =>
+            <div key={index} className="chat-choose__people">
+                <img src="gdf.jpg" />
+                <div>
+                    <p className="name">{todo.name}</p>
+                    <p className="lastMessage">Пока оставим так</p>
+                </div>
+            </div>
+        );
+        if (!_.isEqual(todoItems,props.story)) {
+            props.updateStory(todoItems);
+        }
     });
     if (props.state == "chat") {
         return(
             <div className="display chat">
                 <div className="chat-choose">
-                    <div className="chat-choose__people">
-                        <img src="gdf.jpg" />
-                        <div>
-                            <p className="name">Максим Егоров</p>
-                            <p className="lastMessage">Последнее сообщение</p>
-                        </div>
-                    </div>
+                    {props.story}
                 </div>
                 <div className="chat-messages">
                     <div className="message in">
