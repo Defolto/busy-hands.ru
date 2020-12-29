@@ -52,8 +52,12 @@ app.post('/getUsersChat', function(request, response){
         console.log(users);
 
         collection.find({"email": {$in: users}}).toArray(function(err, results){
-            console.log(results);
-            response.json(results);
+            let users = []
+            results.forEach((element) => {
+                users.push(new User(element));
+            });
+            console.log(users);
+            response.json(users);
         });
     });
 });

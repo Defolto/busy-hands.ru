@@ -2,13 +2,14 @@ import React from 'react'
 import '../styles/main.scss'
 import {sendMessage, cleareInput} from '../js/functions'
 import _ from 'underscore'
+const User = require('../server/models/User');
 
 export class Main extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             pointMenu: "chat",
-            story: "Здесь пока пусто"
+            story: false
         }
     }
 
@@ -41,6 +42,7 @@ export class Main extends React.Component {
                 </div>
                 <Display state={this.state.pointMenu} 
                         userChats={this.props.infoUser.chats}
+                        userEmail = {this.props.infoUser.email}
                         updateStory={this.updateStory}
                         story={this.state.story} />
             </div>
@@ -118,31 +120,44 @@ function Display(props) {
     })
     .then(res => res.json())
     .then(res => {
-        const todoItems = res.map((todo, index) =>
-            <div key={index} className="chat-choose__people">
-                <img src="gdf.jpg" />
-                <div>
-                    <p className="name">{todo.name}</p>
-                    <p className="lastMessage">Пока оставим так</p>
-                </div>
-            </div>
-        );
-        if (!_.isEqual(todoItems,props.story)) {
-            props.updateStory(todoItems);
+        let users = [];
+        res.forEach(element => {
+            users.push(new User(element));
+        });
+        if (!_.isEqual(users,props.story)) {
+            console.log(users);
+            props.updateStory(users);
         }
     });
+    console.log(props.story);
+    let userChats;
+    // FIXME: сделать переключение между чатами
+    if (props.story) {
+        userChats = props.story.map((element, index) =>{
+            let userChat = element.getUsersChats(props.userEmail);
+            return(<div key={index}  className="chat-choose__people">
+                        <img src={"server/img/" + userChat.img} />
+                        <div>
+                            <p className="name">{userChat.name}</p>
+                            <p className="lastMessage">{userChat.lastMessage}</p>
+                        </div>
+                    </div>)
+        });
+    }
     if (props.state == "chat") {
         return(
             <div className="display chat">
                 <div className="chat-choose">
-                    {props.story}
+                    {userChats}
                 </div>
                 <div className="chat-messages">
-                    <div className="message in">
-                        Привет:)
-                    </div>
-                    <div className="message out">
-                        Хех, салам
+                    <div className="chat-messages__wrapper">
+                        <div className="message in">
+                            Привет:)
+                        </div>
+                        <div className="message out">
+                            Хех, салам
+                        </div>
                     </div>
 
                     <form onSubmit={(event)=>{event.preventDefault();

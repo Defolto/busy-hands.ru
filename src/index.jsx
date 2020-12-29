@@ -20,6 +20,7 @@ class BusyHands extends React.Component {
         }
     }
 
+    // для оптимизации высоты блоков main и chat-choose
     componentDidUpdate(){
         if (this.state.login) {
             setHeightMain();
@@ -43,6 +44,7 @@ class BusyHands extends React.Component {
         })
         .then(res => res.json())
         .then(res => {
+            // если пользователь найден
             if (res) {
                 this.setState({
                     login: true,
@@ -64,6 +66,7 @@ class BusyHands extends React.Component {
     }
 
     render() {
+        // проверка на вход пользователя
         if (this.state.login) {
             return (
                 <Fragment>
@@ -88,6 +91,7 @@ class BusyHands extends React.Component {
                             <p>Пароль:</p>
                             <input type="password" name="password" id="login-password"/>
                         </label>
+                        {/* предупреждение, если пользователь ошибся в первый раз с данными */}
                         {this.state.errorLogin ? <p className="errorLogin active">проверьте данные</p> : <p className="errorLogin pass">проверьте данные</p>}
                         <input type="submit" value="Войти"/>
                     </form>

@@ -126,11 +126,19 @@ main .col-right .chat-choose__people {
   flex-direction: row;
   padding: 10px;
   border-bottom: 1px solid #000;
+  cursor: pointer;
+  transition: 1s;
 }
 main .col-right .chat-choose__people img {
   width: 40px;
   height: 40px;
   margin-right: 15px;
+}
+main .col-right .chat-choose__people:hover {
+  background-color: #d6d6d6;
+}
+main .col-right .chat-choose__active {
+  background-color: #d6d6d6;
 }
 main .col-right .chat-messages {
   padding: 10px;
@@ -138,17 +146,22 @@ main .col-right .chat-messages {
   width: 100%;
   flex-direction: column;
 }
-main .col-right .chat-messages .message {
+main .col-right .chat-messages__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+main .col-right .chat-messages__wrapper .message {
   padding: 10px 15px;
   border-radius: 10px;
   margin: 8px 0;
   background-color: white;
   max-width: 45%;
+  display: inline;
 }
-main .col-right .chat-messages .in {
+main .col-right .chat-messages__wrapper .in {
   margin-right: auto;
 }
-main .col-right .chat-messages .out {
+main .col-right .chat-messages__wrapper .out {
   margin-left: auto;
 }
 main .col-right .chat-messages form {
