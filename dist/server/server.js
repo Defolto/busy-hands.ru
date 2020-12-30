@@ -15,9 +15,21 @@ app.use(express.static(path.resolve(__dirname, '../')));
 
 app.use(express.json());
 
-app.post('/test', function(request, response){
-    console.log(request.body.text);
-    response.json({answer: request.body.text + "12"});
+app.post('/sendMessage', function(request, response){
+    mongoClient.connect(function(err, client){
+
+        const db = client.db("busy-hand");
+        const collection = db.collection("users");
+         
+        collection.find({"email": request.body.date.email, "password": request.body.date.password}).toArray(function(err, results){
+            if (results.length) {
+                let user = new User(results[0])
+                response.json(user);
+            } else {
+                response.json(false);
+            }
+        });
+    });
 });
 
 app.post('/login', function(request, response){
@@ -25,7 +37,6 @@ app.post('/login', function(request, response){
 
         const db = client.db("busy-hand");
         const collection = db.collection("users");
-        console.log(request.body.date.email);
          
         collection.find({"email": request.body.date.email, "password": request.body.date.password}).toArray(function(err, results){
             if (results.length) {
@@ -49,14 +60,11 @@ app.post('/getUsersChat', function(request, response){
             users.push(element.email)
         });
 
-        console.log(users);
-
         collection.find({"email": {$in: users}}).toArray(function(err, results){
             let users = []
             results.forEach((element) => {
                 users.push(new User(element));
             });
-            console.log(users);
             response.json(users);
         });
     });

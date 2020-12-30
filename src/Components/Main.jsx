@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../styles/main.scss'
 import {sendMessage, cleareInput} from '../js/functions'
 import _ from 'underscore'
@@ -107,6 +107,8 @@ function Calendar(props) {
 }
 
 function Display(props) {
+    const [activeChatStory, setActiveStory] = useState(false);
+    const [activeEmail, setActiveEmail] = useState(false);
     fetch('/getUsersChat', {
         method: 'POST',
         headers: {
@@ -129,13 +131,27 @@ function Display(props) {
             props.updateStory(users);
         }
     });
-    console.log(props.story);
+
+    let activeChat = (email) =>{
+        props.userChats.forEach(element => {
+            if (element.email == email) {
+                let newActiveChatStory = element.story.map((element, index) =>{
+                    return(<div key={index} className={element.way == 'in' ? "message in" : "message out"}>
+                                {element.text}
+                                <p className="date">{element.date}</p>
+                            </div>)
+                });
+                setActiveStory(newActiveChatStory);
+                setActiveEmail(email);
+            }
+        });
+    }
+    console.log(activeEmail);
     let userChats;
-    // FIXME: сделать переключение между чатами
     if (props.story) {
         userChats = props.story.map((element, index) =>{
             let userChat = element.getUsersChats(props.userEmail);
-            return(<div key={index}  className="chat-choose__people">
+            return(<div key={index} onClick={()=>activeChat(userChat.email)} className="chat-choose__people">
                         <img src={"server/img/" + userChat.img} />
                         <div>
                             <p className="name">{userChat.name}</p>
@@ -152,16 +168,11 @@ function Display(props) {
                 </div>
                 <div className="chat-messages">
                     <div className="chat-messages__wrapper">
-                        <div className="message in">
-                            Привет:)
-                        </div>
-                        <div className="message out">
-                            Хех, салам
-                        </div>
+                        {activeChatStory}
                     </div>
 
                     <form onSubmit={(event)=>{event.preventDefault();
-                                            sendMessage(document.querySelector("#sendMessage__text").value);
+                                            sendMessage(document.querySelector("#sendMessage__text").value, );
                                             cleareInput("sendMessage__text")}} method="post" id="sendMessage">
                         <input className="text" type="text" id="sendMessage__text"/>
                         <input className="submit" type="submit" value="Отправить"/>

@@ -17,7 +17,8 @@ class User{
         return {
             img: this.img,
             name: this.name,
-            lastMessage: lastMessage
+            lastMessage: lastMessage,
+            email: this.email
         }
     }
 }

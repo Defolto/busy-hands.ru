@@ -138,11 +138,22 @@ main{
 
                     .message{
                         padding: 10px 15px;
+                        padding-right: 25px;
+                        padding-bottom: 25px;
                         border-radius: 10px;
+                        font-size: 18px;
                         margin: 8px 0;
                         background-color: white;
                         max-width: 45%;
                         display: inline;
+                        position: relative;
+
+                        .date{
+                            position: absolute;
+                            bottom: 5px;
+                            right: 5px;
+                            font-size: 10px;
+                        }
                     }
     
                     .in{
